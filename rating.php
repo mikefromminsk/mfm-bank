@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER[DOCUMENT_ROOT] . "/mfm-credit/utils.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/mfm-credit/utils.php";
 
 $address = get_required(address);
 $answers = get_required(answers);
