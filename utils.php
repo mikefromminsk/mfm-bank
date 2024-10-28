@@ -1,7 +1,5 @@
 <?php
-
 require_once $_SERVER["DOCUMENT_ROOT"] . "/mfm-data/utils.php";
-
 
 function findInArray($array, $key, $value)
 {
