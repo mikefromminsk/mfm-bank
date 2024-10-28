@@ -1,6 +1,11 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/mfm-data/utils.php";
 
+$usd_domain = 'usdt';
+
+$bank_address = 'bank';
+$credit_percent = 7;
+
 function findInArray($array, $key, $value)
 {
     foreach ($array as $item) {

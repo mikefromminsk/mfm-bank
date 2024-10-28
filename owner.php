@@ -1,6 +1,12 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/mfm-db/params.php";
 
-$path = get_required(path);
+$redirect = get_required(redirect);
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/$path";
+if ($redirect != "mfm-exchange/owner.php") {
+    error("Invalid redirect");
+}
+
+// token send amount = 0 and delegate is empty
+
+require_once $_SERVER["DOCUMENT_ROOT"] . "/$redirect";

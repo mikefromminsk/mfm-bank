@@ -1,5 +1,5 @@
 function openCredit(success) {
-    showDialog('/mfm-credit/quiz/index.html', success, function ($scope) {
+    showDialog('/mfm-credit/deposit/index.html', success, function ($scope) {
 
         $scope.pageIndex = 0
         function init(){
@@ -37,10 +37,10 @@ function openCredit(success) {
         $scope.getCredit = function () {
             getPin(function (pin) {
                 calcPass(wallet.address(), pin, function (pass) {
-                    postContract("/mfm-credit/credit.php", {
+                    postContract("mfm-bank", "credit.php", {
                         address: wallet.address(),
+                        pass: pass,
                         answers: $scope.questions,
-                        pass: pass
                     }, function (response) {
                         $scope.credit = response
                         $scope.$apply()
