@@ -5,7 +5,9 @@
                 <div class="flex col p16 align-center">
                     <p class="size24 bold mv16 nowrap-disabled">{{item.question}}</p>
                     <md-radio-group ng-model="item.answer">
-                        <md-radio-button ng-value="answer" ng-repeat="answer in item.answers" ng-click="next()">{{answer}}</md-radio-button>
+                        <md-radio-button ng-value="answer" ng-repeat="answer in item.answers" ng-click="next()">
+                            {{answer}}
+                        </md-radio-button>
                     </md-radio-group>
                 </div>
                 <div class="primary-button m16 white-back" ng-click="next()">Skip</div>
@@ -13,12 +15,20 @@
         </md-tab>
         <md-tab label="ss">
             <div class="fill col">
-            <p>Вы можете взять в кредит</p>
-            <p>Сумма: {{formatAmount(amount, wallet.gas_domain)}}</p>
-            <p>Срок: {{formatSec(period)}}</p>
-            <p>Процент: {{formatPercent(percent)}}</p>
-            <div class="primary-button m16 mt0" ng-click="getCredit()">Accept</div>
-            <div class="primary-button m16 mt0 white-back" ng-click="close()">Decline</div>
+                <p>Вы можете взять в кредит</p>
+                <p>Сумма: {{formatAmount(rating, wallet.gas_domain)}}</p>
+                <p>Процент: {{formatPercent(percent)}}</p>
+                <div class="flex"></div>
+                <div class="primary-button m16 mt0" ng-click="getCredit()">Accept</div>
+                <div class="primary-button m16 mt0 white-back" ng-click="close()">Decline</div>
+            </div>
+        </md-tab>
+        <md-tab label="sss">
+            <div class="fill col">
+                <p>Вы получили {{formatAmount(rating, wallet.gas_domain)}}</p>
+                <div class="flex"></div>
+                <div class="primary-button m16 mt0" ng-click="close()">Close</div>
+            </div>
         </md-tab>
     </md-tabs>
 </md-dialog>

@@ -1,9 +1,9 @@
 function openCredit(success) {
-    showDialog('/mfm-credit/credit/index.html', success, function ($scope) {
+    showDialog('/mfm-bank/credit/index.html', success, function ($scope) {
 
         $scope.pageIndex = 0
         function init(){
-            get("/mfm-credit/quiz.json", function (text) {
+            get("/mfm-bank/quiz.json", function (text) {
                 let levels = JSON.parse(text)
                 $scope.questions = []
                 for (const level of levels) {
@@ -21,14 +21,18 @@ function openCredit(success) {
             }, 500)
         }
 
+        $scope.$watch('pageIndex', function (newValue, oldValue) {
+            if (newValue == $scope.questions.length) {
+                $scope.getRating()
+            }
+        })
+
         $scope.getRating = function () {
-            postContract("/mfm-credit/rating.php", {
+            postContract("mfm-bank", "rating.php", {
                 address: wallet.address(),
-                answers: $scope.questions,
+                answers: JSON.stringify($scope.questions),
             }, function (response) {
                 $scope.rating = response.rating
-                $scope.amount = response.rating * response.multiplier
-                $scope.period = response.period
                 $scope.percent = response.percent
                 $scope.$apply()
             })
@@ -40,10 +44,9 @@ function openCredit(success) {
                     postContract("mfm-bank", "credit.php", {
                         address: wallet.address(),
                         pass: pass,
-                        answers: $scope.questions,
+                        answers: JSON.stringify($scope.questions),
                     }, function (response) {
-                        $scope.credit = response
-                        $scope.$apply()
+                        $scope.next()
                     })
                 })
 

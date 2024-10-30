@@ -1,10 +1,37 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/mfm-data/utils.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/mfm-analytics/utils.php";
 
-$usd_domain = 'usdt';
 
 $bank_address = 'bank';
 $credit_percent = 7;
+
+const PROVIDERS = [
+    "BSC" => [
+        name => "BSC",
+        title => "BSC BEP-20",
+        contract => '0x55d398326f99059ff775485246999027b3197955',
+        min_deposit => 5,
+        fee => 1,
+        deposit_addresses => [
+            "0x1e0426Ba2E77eDdf7FfB19C57B992c4dcC6455F4",
+        ],
+        deadline_interval => 60 * 30,
+    ],
+    "TRON" => [
+        name => "TRON",
+        title => "Tron TRC-20",
+        min => 0.02,
+        contract => 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+        min_deposit => 5,
+        fee => 1,
+        deposit_addresses => [
+            "TPWZ6TNgYBCh18Bf4EVfKesoHHRJ4w8SgT",
+            "TSXvWWCsysLQoPujPCEbYQySXP66ZvN57b",
+        ],
+        deadline_interval => 60 * 30,
+    ],
+];
 
 function findInArray($array, $key, $value)
 {
@@ -18,23 +45,13 @@ function findInArray($array, $key, $value)
 
 function rating($answers, $address = null)
 {
-    $quiz = json_decode(file_get_contents("quiz.json"), true);
-    $passedLevels = 0;
-    foreach ($answers as $answer) {
-        if (!isset($answer[level])) continue;
-        if (!isset($answer[question])) continue;
-        if (!isset($answer[answer])) continue;
-        $question = findInArray($quiz, "level", $answer[level]);
-        if ($question == null) continue;
-        $question = findInArray($question[questions], "question", $answer[question]);
-        if ($question == null) continue;
-        if ($question[answer] == $answer[answer]) {
-            $levelIndex = array_search($question, $quiz);
-            $passedLevels += $levelIndex + 1;
-        }
-        if ($address != null) {
-            trackEvent("mfm-credit", $quiz[level], $address, $question[question], $question[answer] == $answer[answer]);
+    $rating = 0;
+    for ($i = 0; $i < sizeof($answers); $i++) {
+        $answer = $answers[$i];
+        if ($answer[answer] == $answer[correct]) {
+            $rating += $i + 1;
         }
     }
-    return $passedLevels;
+    //trackEvent("mfm-credit", $quiz[level], $address, $question[question], $question[answer] == $answer[answer]);
+    return $rating;
 }
