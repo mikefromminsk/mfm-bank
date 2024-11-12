@@ -11,7 +11,7 @@ $credit_percent = get_required(credit_percent);
 
 //if (!dataExist([usdt, deposit, $deposit_address])) error("deposit address is not exist");
 
-$deposit_start_event = getEvent($chain, $deposit_address, null, $token, deposit_start);
+$deposit_start_event = getEvent(deposit_start, $chain, $deposit_address, null, $token);
 if ($deposit_start_event == null) error("address is null");
 
 //if ($deadline < time()) error("deposit time is finished");
@@ -73,7 +73,7 @@ if ($chain == "TRON"){
 
 $deposited = 0;
 
-$deposit_success_event = getEvent($chain, $deposit_address, null, $token, deposit_success);
+$deposit_success_event = getEvent(deposit_success, $chain, $deposit_address, null, $token);
 $last_deposited_time = $deposit_success_event[time] ?: 0;
 foreach ($trans as $tran) {
     if ($tran[block_ts] > $last_deposited_time) {
@@ -84,7 +84,7 @@ foreach ($trans as $tran) {
 if ($deposited > 0) {
     $deposited = round(floor($deposited * 100) / 100, 2);
     tokenSend($token, $bank_address, $deposit_start_event[to], $deposited);
-    trackEvent($chain, $deposit_address, $deposit_start_event[to], $token, deposit_success, $deposited);
+    trackEvent(deposit_success, $chain, $deposit_address, $deposit_start_event[to], $token, $deposited);
 }
 
 $response[last_block_ts] = $last_deposited_time;

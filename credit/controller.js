@@ -8,7 +8,6 @@ function openCredit(success) {
                 $scope.questions = []
                 for (const level of levels) {
                     $scope.questions.push(level.questions[Math.floor(Math.random() * level.questions.length)])
-                    break
                 }
                 $scope.$apply()
             })
@@ -41,7 +40,8 @@ function openCredit(success) {
         $scope.getCredit = function () {
             getPin(function (pin) {
                 calcPass(wallet.address(), pin, function (pass) {
-                    postContract("mfm-bank", "credit.php", {
+                    postContract("mfm-bank", "owner.php", {
+                        redirect: "mfm-bank/credit.php",
                         address: wallet.address(),
                         pass: pass,
                         answers: JSON.stringify($scope.questions),
