@@ -84,7 +84,7 @@ foreach ($trans as $tran) {
 if ($deposited > 0) {
     $deposited = round(floor($deposited * 100) / 100, 2);
     tokenSend($token, $bank_address, $deposit_start_event[to], $deposited);
-    trackEvent(deposit_success, $chain, $deposit_address, $deposit_start_event[to], $token, $deposited);
+    //trackEvent(deposit_success, $chain, $deposit_address, $deposit_start_event[to], $token, $deposited);
 }
 
 $response[last_block_ts] = $last_deposited_time;

@@ -24,7 +24,7 @@ if ($deposit_address == null) {
         break;
     }
     if ($deposit_address == null) error("all addresses are busy");
-    trackEvent(deposit_start, $chain, $deposit_address, $address, $token);
+    //trackEvent(deposit_start, $chain, $deposit_address, $address, $token);
 }
 
 $response[deadline] = getEvent(deposit_start, $chain, $deposit_address, $address, $token)[time] + $provider[deadline_interval];
