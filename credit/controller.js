@@ -2,7 +2,8 @@ function openCredit(success) {
     showDialog('/mfm-bank/credit/index.html', success, function ($scope) {
 
         $scope.pageIndex = 0
-        function init(){
+
+        function init() {
             get("/mfm-bank/quiz.json", function (text) {
                 let levels = JSON.parse(text)
                 $scope.questions = []
@@ -15,13 +16,24 @@ function openCredit(success) {
 
         $scope.next = function () {
             setTimeout(function () {
-                $scope.pageIndex++
+                let question = $scope.questions[$scope.pageIndex]
+                if (question.answer == question.correct) {
+                    openTab($scope.pageIndex + 1)
+                } else {
+                    openTab($scope.questions.length)
+                }
+            }, 100)
+        }
+
+        function openTab(index) {
+            setTimeout(function () {
+                $scope.pageIndex = index
                 $scope.$apply()
             }, 500)
         }
 
         $scope.$watch('pageIndex', function (newValue, oldValue) {
-            if (newValue == $scope.questions.length) {
+            if ($scope.questions != null && newValue == $scope.questions.length) {
                 $scope.getRating()
             }
         })
@@ -39,14 +51,14 @@ function openCredit(success) {
 
         $scope.getCredit = function () {
             getPin(function (pin) {
-                calcPass(wallet.address(), pin, function (pass) {
+                calcPass(wallet.gas_domain, pin, function (pass) {
                     postContract("mfm-bank", "owner.php", {
                         redirect: "mfm-bank/credit.php",
                         address: wallet.address(),
                         pass: pass,
                         answers: JSON.stringify($scope.questions),
                     }, function (response) {
-                        $scope.next()
+                        openTab($scope.pageIndex + 1)
                     })
                 })
 

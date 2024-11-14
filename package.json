@@ -1,8 +1,8 @@
 {
-  "name": "mfm-bank",
-  "version": "1.1.30",
-  "author": "x29a100@gmail.com",
-  "dependencies": {
-    "mfm-token": "latest"
-  }
+    "name": "mfm-bank",
+    "version": "1.1.32",
+    "author": "x29a100@gmail.com",
+    "dependencies": {
+        "mfm-token": "latest"
+    }
 }
