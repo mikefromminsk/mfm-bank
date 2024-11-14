@@ -8,35 +8,30 @@
     </div>
     <div class="col content">
         <div class="col input-content">
-            <div class="col">
-                <div class="row input-wrapper-black">
-                    <div class="input-label">Tron address (TRC-20)</div>
-                    <input type="text"
-                           ng-model="withdrawal_address">
-                </div>
-                <p class="red-text" >{{errorAddress}}</p>
+            <div class="row input-wrapper-black">
+                <div class="input-label">Tron address (TRC-20)</div>
+                <input type="text"
+                       ng-model="withdrawal_address">
             </div>
-            <div class="col">
-                <div class="row input-wrapper-black">
-                    <div class="input-label">Amount USDT</div>
-                    <input type="number" ng-model="amount"
-                           ng-change="calcTotal()">
-                    <div class="input-label-right row align-center-center ripple" ng-click="setMax()">
-                        <p>MAX {{formatAmount(coin.balance)}}</p>
-                    </div>
+            <p class="red-text" ng-show="errorAddress">{{errorAddress}}</p>
+            <div class="row input-wrapper-black">
+                <div class="input-label">Amount USDT</div>
+                <input type="number" ng-model="amount"
+                       ng-change="calcTotal()">
+                <div class="input-label-right row align-center-center ripple" ng-click="setMax()">
+                    <p>MAX {{formatAmount(coin.balance)}}</p>
                 </div>
-                <p class="red-text" >{{errorAmount}}</p>
-                <div class="mt8 row nowrap">
-                    <p>Commission: {{formatAmount(provider.fee, wallet.gas_domain)}}</p>
-                </div>
+            </div>
+            <p class="red-text" ng-show="errorAmount">{{errorAmount}}</p>
+            <div class="row nowrap" st>
+                <p>Commission: {{formatAmount(provider.fee, wallet.gas_domain)}}</p>
             </div>
             <div class="col align-center-center">
                 <p class="">you get</p>
                 <p class="size32 bold">{{formatAmount(total, wallet.gas_domain)}}</p>
             </div>
-        </div>
-        <div class="row mh16 mv8">
-            <button class="flex primary-button radius4" ng-click="withdrawal()"
+            <button class="primary-button"
+                    ng-click="withdrawal()"
                     ng-disabled="!withdrawal_address || !amount || total == 0">
                 Withdrawal
             </button>

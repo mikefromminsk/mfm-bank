@@ -14,20 +14,22 @@
             </div>
         </md-tab>
         <md-tab label="ss">
-            <div class="fill col">
-                <p>Вы можете взять в кредит</p>
-                <p>Сумма: {{formatAmount(rating, wallet.gas_domain)}}</p>
-                <p>Процент: {{formatPercent(percent)}}</p>
-                <div class="flex"></div>
-                <div class="primary-button m16 mt0" ng-click="getCredit()">Accept</div>
-                <div class="primary-button m16 mt0 white-back" ng-click="close()">Decline</div>
-            </div>
-        </md-tab>
-        <md-tab label="sss">
-            <div class="fill col">
-                <p>Вы получили {{formatAmount(rating, wallet.gas_domain)}}</p>
-                <div class="flex"></div>
-                <div class="primary-button m16 mt0" ng-click="close()">Close</div>
+            <div class="fill col input-content">
+                <div class="flex col p16 align-center size24 bold">
+                    <p class=" mv16 nowrap-disabled">{{item.question}}</p>
+                    <p>Вы можете взять в кредит</p>
+                    <p>Сумма: {{formatAmount(rating, wallet.gas_domain)}}</p>
+                    <p>Процент: {{formatPercent(percent)}}</p>
+                </div>
+                <div class="row align-start-center">
+                    <input type="checkbox" ng-click="agreeWithRules()" class="styled-checkbox"/>
+                    <p class="mh8">agree to</p>
+                    <a href="/mfm-angular-template/docs?path=/mfm-bank/docs/credit_rules.md" target="_blank">
+                        Credit rules
+                    </a>
+                </div>
+                <div class="primary-button" ng-disabled="!agree" ng-click="getCredit()">Accept</div>
+                <div class="primary-button white-back" ng-click="close()">Decline</div>
             </div>
         </md-tab>
     </md-tabs>

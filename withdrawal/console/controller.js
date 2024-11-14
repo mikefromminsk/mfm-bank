@@ -1,6 +1,5 @@
 function openWithdrawal(success) {
     showBottomSheet('/mfm-bank/withdrawal/console/index.html', success, function ($scope) {
-            addFormats($scope)
 
             $scope.withdrawal_address = ""
             $scope.amount = ""

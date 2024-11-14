@@ -4,11 +4,21 @@ function openCredit(success) {
         $scope.pageIndex = 0
 
         function init() {
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
             get("/mfm-bank/quiz.json", function (text) {
                 let levels = JSON.parse(text)
                 $scope.questions = []
                 for (const level of levels) {
-                    $scope.questions.push(level.questions[Math.floor(Math.random() * level.questions.length)])
+                    let question = level.questions[Math.floor(Math.random() * level.questions.length)]
+                    question.answers = shuffleArray(question.answers)
+                    $scope.questions.push(question)
                 }
                 $scope.$apply()
             })
@@ -57,12 +67,17 @@ function openCredit(success) {
                         address: wallet.address(),
                         pass: pass,
                         answers: JSON.stringify($scope.questions),
-                    }, function (response) {
-                        openTab($scope.pageIndex + 1)
+                    }, function () {
+                        $scope.close()
                     })
                 })
 
             })
+        }
+
+        $scope.agree = false
+        $scope.agreeWithRules = function () {
+            $scope.agree = !$scope.agree
         }
 
         init()
