@@ -1,4 +1,5 @@
 function openWithdrawal(success) {
+    trackCall(arguments)
     showBottomSheet('/mfm-bank/withdrawal/console/index.html', success, function ($scope) {
 
             $scope.withdrawal_address = ""

@@ -1,4 +1,5 @@
 function openDeposit(success) {
+    trackCall(arguments)
     var depositCheckTimer
     showBottomSheet('/mfm-bank/deposit/console/index.html', function () {
         if (depositCheckTimer)

@@ -13,7 +13,7 @@
                 <input type="text"
                        ng-model="withdrawal_address">
             </div>
-            <p class="red-text" ng-show="errorAddress">{{errorAddress}}</p>
+            <p class="text-red" ng-show="errorAddress">{{errorAddress}}</p>
             <div class="row input-wrapper-black">
                 <div class="input-label">Amount USDT</div>
                 <input type="number" ng-model="amount"
@@ -22,7 +22,7 @@
                     <p>MAX {{formatAmount(coin.balance)}}</p>
                 </div>
             </div>
-            <p class="red-text" ng-show="errorAmount">{{errorAmount}}</p>
+            <p class="text-red" ng-show="errorAmount">{{errorAmount}}</p>
             <div class="row nowrap" st>
                 <p>Commission: {{formatAmount(provider.fee, wallet.gas_domain)}}</p>
             </div>
