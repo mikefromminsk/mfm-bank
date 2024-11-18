@@ -63,7 +63,7 @@ function openCredit(success) {
             getPin(function (pin) {
                 calcPass(wallet.gas_domain, pin, function (pass) {
                     postContract("mfm-bank", "owner.php", {
-                        redirect: "mfm-bank/credit.php",
+                        redirect: "/mfm-bank/credit.php",
                         address: wallet.address(),
                         pass: pass,
                         answers: JSON.stringify($scope.questions),
