@@ -1,20 +1,19 @@
 <md-bottom-sheet class="col">
-    <div style="position: absolute; right: 0; top: -70px; z-index: 2">
-        <img src="/mfm-wallet/img/deposit.png">
-    </div>
     <div class="row header align-start-center">
-        <img class="ripple" src="/mfm-wallet/img/back.svg" ng-click="back()">
-        <p>Withdrawal</p>
+        <div class="row img32 radius-default back-gray align-center-center ripple" ng-click="back()">
+            <img class="img16 img-gray400" src="/mfm-wallet/img/down.svg">
+        </div>
+        Withdrawal
     </div>
     <div class="col content">
         <div class="col input-content">
-            <div class="row input-wrapper-black">
+            <div class="row input-wrapper">
                 <div class="input-label">Tron address (TRC-20)</div>
                 <input type="text"
                        ng-model="withdrawal_address">
             </div>
             <p class="text-red" ng-show="errorAddress">{{errorAddress}}</p>
-            <div class="row input-wrapper-black">
+            <div class="row input-wrapper">
                 <div class="input-label">Amount USDT</div>
                 <input type="number" ng-model="amount"
                        ng-change="calcTotal()">
