@@ -2,13 +2,14 @@
     <md-tabs class="flex col" md-selected="pageIndex" md-swipe-content>
         <md-tab label="questions.indexOf(item)" ng-repeat="item in questions">
             <div class="fill col">
-                <div class="flex col p16 align-center">
-                    <p class="size24 bold mv16 nowrap-disabled">{{item.question}}</p>
-                    <md-radio-group ng-model="item.answer">
-                        <md-radio-button ng-value="answer" ng-repeat="answer in item.answers" ng-click="next()">
-                            {{answer}}
-                        </md-radio-button>
-                    </md-radio-group>
+                <div class="flex col p16 align-center input-content">
+                    <p class="text1 nowrap-disabled">{{item.question}}</p>
+                    <div class="mt16 p16 back-gray radius-default"
+                         ng-repeat="answer in item.answers"
+                         ng-style="{'background-color': item.answer === answer ? 'var(--gray200)' : 'var(--gray100)'}"
+                         ng-click="setAnsver(item, answer)">
+                        <p>{{answer}}</p>
+                    </div>
                 </div>
                 <div class="primary-button m16 back-black" ng-click="next()">Skip</div>
             </div>

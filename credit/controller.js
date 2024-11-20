@@ -24,6 +24,11 @@ function openCredit(success) {
             })
         }
 
+        $scope.setAnsver = function (item, answer) {
+            item.answer = answer
+            $scope.next()
+        }
+
         $scope.next = function () {
             setTimeout(function () {
                 let question = $scope.questions[$scope.pageIndex]
