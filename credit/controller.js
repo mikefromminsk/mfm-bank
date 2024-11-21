@@ -24,27 +24,25 @@ function openCredit(success) {
             })
         }
 
-        $scope.setAnsver = function (item, answer) {
+        $scope.setAnswer = function (item, answer) {
             item.answer = answer
-            $scope.next()
+            setTimeout(function () {
+                $scope.next()
+            }, 500)
         }
 
         $scope.next = function () {
-            setTimeout(function () {
-                let question = $scope.questions[$scope.pageIndex]
-                if (question.answer == question.correct) {
-                    openTab($scope.pageIndex + 1)
-                } else {
-                    openTab($scope.questions.length)
-                }
-            }, 100)
+            let question = $scope.questions[$scope.pageIndex]
+            if (question.answer == question.correct) {
+                openTab($scope.pageIndex + 1)
+            } else {
+                openTab($scope.questions.length)
+            }
         }
 
         function openTab(index) {
-            setTimeout(function () {
-                $scope.pageIndex = index
-                $scope.$apply()
-            }, 500)
+            $scope.pageIndex = index
+            $scope.$apply()
         }
 
         $scope.$watch('pageIndex', function (newValue, oldValue) {
