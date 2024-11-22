@@ -12,10 +12,11 @@ function openCredit(success) {
                 return array;
             }
 
-            get("/mfm-bank/quiz.json", function (text) {
-                let levels = JSON.parse(text)
+            postContract("mfm-bank", "quiz.php", {
+                lang: navigator.language.split('-')[0]
+            }, function (response) {
                 $scope.questions = []
-                for (const level of levels) {
+                for (const level of response) {
                     let question = level.questions[Math.floor(Math.random() * level.questions.length)]
                     question.answers = shuffleArray(question.answers)
                     $scope.questions.push(question)

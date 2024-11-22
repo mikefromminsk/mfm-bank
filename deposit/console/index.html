@@ -3,29 +3,29 @@
         <div class="row img32 radius-default back-gray align-center-center ripple" ng-click="back()">
             <img class="img16 img-gray400" src="/mfm-wallet/img/down.svg">
         </div>
-        <p>Deposit {{formatTicker(wallet.gas_domain)}}</p>
+        <p>{{str.deposit}} {{formatTicker(wallet.gas_domain)}}</p>
     </div>
     <div class="col content align-start-center">
         <div class="col block input-content">
             <div class="row align-start-center">
                 <div class="flex row input-wrapper">
-                    <div class="input-label">Tron deposit address (TRC-20)</div>
+                    <div class="input-label">{{str.tron_address}}</div>
                     <input type="text"
                            autocapitalize="off"
                            id="deposit_address"
                            ng-model="deposit_address">
                 </div>
-                <div class="primary-button m0" ng-click="copy()">Copy</div>
+                <div class="primary-button m0" ng-click="copy()">{{str.copy}}</div>
             </div>
             <div class="flex row">
-                <div class="flex">Deposit deadline</div>
+                <div class="flex">{{str.deposit_deadline}}</div>
                 <div class="nowrap">{{formatTime(deadline)}}</div>
             </div>
             <div class="row align-center-start">
                 <div class="col align-center-center" style="width: 100px; height: 100px;">
                     <img style="position: absolute" src="/mfm-wallet/img/deposit_circle.png">
                     <p class="size20 text-accent bold">{{countDownTimer}}</p>
-                    <div class="mt4" style="text-align: center">Check for <br>deposit</div>
+                    <div class="mt4 nowrap-disabled" style="text-align: center; max-width: 80px">{{deposit_check}}</div>
                 </div>
             </div>
         </div>

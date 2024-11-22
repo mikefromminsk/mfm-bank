@@ -11,26 +11,26 @@
                         <p>{{answer}}</p>
                     </div>
                 </div>
-                <div class="primary-button m16 back-black" ng-click="next()">Skip</div>
+                <div class="primary-button m16 back-black" ng-click="next()">{{str.skip}}</div>
             </div>
         </md-tab>
         <md-tab label="ss">
             <div class="fill col input-content">
                 <div class="flex col p16 align-center size24 bold">
                     <p class=" mv16 nowrap-disabled">{{item.question}}</p>
-                    <p>Вы можете взять в кредит</p>
-                    <p>Сумма: {{formatAmount(rating, wallet.gas_domain)}}</p>
-                    <p>Процент: {{formatPercent(percent)}}</p>
+                    <p>{{str.you_can_get_credit}}</p>
+                    <p>{{str.total}}: {{formatAmount(rating, wallet.gas_domain)}}</p>
+                    <p>{{str.percent}}: {{formatPercent(percent)}}</p>
                 </div>
                 <div class="row align-start-center">
                     <input type="checkbox" ng-click="agreeWithRules()" class="styled-checkbox"/>
-                    <p class="mh8">agree to</p>
+                    <p class="mh8 lowercase">{{str.agree_to}}</p>
                     <a href="/mfm-angular-template/docs?path=/mfm-bank/docs/credit_rules.md" target="_blank">
-                        Credit rules
+                        {{str.credit_rules}}
                     </a>
                 </div>
-                <div class="primary-button back-pay text-white" ng-disabled="!agree" ng-click="getCredit()">Accept</div>
-                <div class="primary-button back-black" ng-click="close()">Decline</div>
+                <div class="primary-button back-pay text-white" ng-disabled="!agree" ng-click="getCredit()">{{str.accept}}</div>
+                <div class="primary-button back-black" ng-click="close()">{{str.decline}}</div>
             </div>
         </md-tab>
     </md-tabs>
