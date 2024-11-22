@@ -13,7 +13,7 @@ function openCredit(success) {
             }
 
             postContract("mfm-bank", "quiz.php", {
-                lang: navigator.language.split('-')[0]
+                lang: storage.getString(storageKeys.language, navigator.language.split('-')[0])
             }, function (response) {
                 $scope.questions = []
                 for (const level of response) {
