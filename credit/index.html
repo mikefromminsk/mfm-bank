@@ -1,37 +1,38 @@
 <md-dialog class="fill col">
-    <md-tabs class="flex col" md-selected="pageIndex" md-swipe-content>
-        <md-tab label="questions.indexOf(item)" ng-repeat="item in questions">
-            <div class="fill col">
-                <div class="flex col p16 align-center input-content">
-                    <p class="text1 nowrap-disabled">{{item.question}}</p>
-                    <div class="mt16 p16 back-gray radius-default"
-                         ng-repeat="answer in item.answers"
-                         ng-style="{'background-color': item.answer === answer ? 'var(--gray200)' : 'var(--gray100)'}"
-                         ng-click="setAnswer(item, answer)">
-                        <p>{{answer}}</p>
+    <div class="row header align-start-center">
+        <p class="flex">{{str.credit}}</p>
+        <div class="row align-center-center img32 back-gray radius-default ripple" ng-click="close()">
+            <img class="img16 img-gray400" src="/mfm-wallet/img/close.svg">
+        </div>
+    </div>
+    <div class="flex col content input-content scroll">
+        <div class="col">
+            <div class="col back-gray radius-default">
+                <div class="row p16 align-start-center ripple">
+                    <div ng-style="getLogo(wallet.gas_domain)"></div>
+                    <div class="flex col ml16">
+                        <p>{{formatTicker(wallet.gas_domain)}}</p>
+                        <p class="mt4 text2">{{formatPrice(token.price)}}</p>
+                    </div>
+                    <div class="col align-end-end">
+                        <p>{{formatAmount(credit, wallet.gas_domain)}}</p>
+                        <p class="mt4 text2 nowrap">{{str.pay_offed}} {{formatPrice(pay_off)}}</p>
                     </div>
                 </div>
-                <div class="primary-button m16 back-black" ng-click="next()">{{str.skip}}</div>
             </div>
-        </md-tab>
-        <md-tab label="ss">
-            <div class="fill col input-content">
-                <div class="flex col p16 align-center size24 bold">
-                    <p class=" mv16 nowrap-disabled">{{item.question}}</p>
-                    <p>{{str.you_can_get_credit}}</p>
-                    <p>{{str.total}}: {{formatAmount(rating, wallet.gas_domain)}}</p>
-                    <p>{{str.percent}}: {{formatPercent(percent)}}</p>
-                </div>
-                <div class="row align-start-center">
-                    <input type="checkbox" ng-click="agreeWithRules()" class="styled-checkbox"/>
-                    <p class="mh8 lowercase">{{str.agree_to}}</p>
-                    <a href="/mfm-angular-template/docs?path=/mfm-bank/docs/credit_rules.md" target="_blank">
-                        {{str.credit_rules}}
-                    </a>
-                </div>
-                <div class="primary-button back-pay text-white" ng-disabled="!agree" ng-click="getCredit()">{{str.accept}}</div>
-                <div class="primary-button back-black" ng-click="close()">{{str.decline}}</div>
-            </div>
-        </md-tab>
-    </md-tabs>
+        </div>
+        <div class="row align-start-center ripple" ng-click="openDoc('/mfm-bank/docs/credit_rules.md')">
+            <img class="img32 p8 mr8 img-gray" src="/mfm-wallet/img/doc.svg">
+            <p class="text2">{{str.credit_rules}}</p>
+        </div>
+        <div class="col p0">
+            <ng-include src="'/mfm-wallet/trans/trans.html'"></ng-include>
+        </div>
+        <div class="col p0">
+            <ng-include src="'/mfm-wallet/trans/trans.html'"></ng-include>
+        </div>
+    </div>
+    <div class="primary-button" ng-click="payOffCredit()">
+        {{str.pay_off_credit}}
+    </div>
 </md-dialog>
