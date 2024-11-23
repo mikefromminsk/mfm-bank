@@ -21,7 +21,7 @@ function openCredit(success) {
         }
 
         $scope.payOffCredit = function () {
-            $scope.openSend(wallet.gas_domain, $scope.bank_address, $scope.amount, init)
+            $scope.openSend(wallet.gas_domain, $scope.bank_address, $scope.amount, close)
         }
 
         function init() {

@@ -24,13 +24,6 @@ function openDeposit(success) {
             })
         }
 
-        $scope.copy = function () {
-            document.getElementById("deposit_address").focus();
-            document.getElementById("deposit_address").select();
-            document.execCommand("copy");
-            showSuccess("Deposit address copied")
-        }
-
         $scope.share = function () {
             navigator.share({
                 text: $scope.deposit_address,

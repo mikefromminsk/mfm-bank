@@ -1,21 +1,21 @@
 <md-bottom-sheet class="col">
     <div class="row header align-start-center">
+        <p class="flex">{{str.deposit}} {{formatTicker(wallet.gas_domain)}}</p>
         <div class="row align-center-center img32 back-gray radius-default ripple" ng-click="back()">
-            <img class="img16 img-gray400" src="/mfm-wallet/img/down.svg">
+            <img class="img16 img-gray400" src="/mfm-wallet/img/close.svg">
         </div>
-        <p>{{str.deposit}} {{formatTicker(wallet.gas_domain)}}</p>
     </div>
     <div class="col content align-start-center">
         <div class="col block input-content">
-            <div class="row align-start-center">
-                <div class="flex row input-wrapper">
-                    <div class="input-label">{{str.tron_address}}</div>
-                    <input type="text"
-                           autocapitalize="off"
-                           id="deposit_address"
-                           ng-model="deposit_address">
-                </div>
-                <div class="primary-button m0" ng-click="copy()">{{str.copy}}</div>
+            <div class="flex row input-wrapper">
+                <div class="input-label">{{str.tron_address}}</div>
+                <input type="text"
+                       autocapitalize="off"
+                       id="deposit_address"
+                       ng-model="deposit_address">
+                <img class="img40 p8 ripple img-white"
+                     src="/mfm-wallet/img/copy.svg"
+                     ng-click="copy(deposit_address)">
             </div>
             <div class="flex row">
                 <div class="flex">{{str.deposit_deadline}}</div>
