@@ -1,6 +1,5 @@
 function openGetCredit(success) {
     showDialog('/mfm-bank/get_credit/index.html?nocache', success, function ($scope) {
-
         $scope.pageIndex = 0
 
         function init() {
