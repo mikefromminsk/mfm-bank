@@ -5,6 +5,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/mfm-analytics/utils.php";
 
 $bank_address = 'bank';
 $credit_percent = 7;
+$pay_off_period_days = 30;
 
 const PROVIDERS = [
     "BSC" => [

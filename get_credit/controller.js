@@ -1,6 +1,7 @@
 function openGetCredit(success) {
     showDialog('/mfm-bank/get_credit/index.html?nocache', success, function ($scope) {
         $scope.pageIndex = 0
+        $scope.session = window.session.toUpperCase()
 
         function init() {
             function shuffleArray(array) {
@@ -56,6 +57,7 @@ function openGetCredit(success) {
                 address: wallet.address(),
                 answers: JSON.stringify($scope.questions),
             }, function (response) {
+                $scope.pay_off_period_days = response.pay_off_period_days
                 $scope.rating = response.rating
                 $scope.percent = response.percent
                 $scope.$apply()
