@@ -65,6 +65,7 @@ function openGetCredit(success) {
         }
 
         $scope.getCredit = function () {
+            $scope.in_progress = true
             getPin(function (pin) {
                 calcPass(wallet.gas_domain, pin, function (pass) {
                     postContract("mfm-bank", "owner.php", {
@@ -74,9 +75,15 @@ function openGetCredit(success) {
                         answers: JSON.stringify($scope.questions),
                     }, function () {
                         $scope.close()
+                    }, function (message) {
+                        $scope.in_progress = false
+                        showError(message)
                     })
+                }, function () {
+                    $scope.in_progress = false
                 })
-
+            }, function () {
+                $scope.in_progress = false
             })
         }
 

@@ -71,7 +71,7 @@
                         </a>
                     </div>
                     <div class="primary-button back-pay"
-                         ng-disabled="!agree"
+                         ng-disabled="in_progress || !agree"
                          ng-click="getCredit()">
                         {{str.accept}}
                     </div>
