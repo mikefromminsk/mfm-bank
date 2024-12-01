@@ -1,7 +1,6 @@
 function openGetCredit(success) {
     showDialog('/mfm-bank/get_credit/index.html?nocache', success, function ($scope) {
         $scope.pageIndex = 0
-        $scope.session = window.session.toUpperCase()
 
         function init() {
             function shuffleArray(array) {
