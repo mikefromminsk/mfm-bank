@@ -20,7 +20,7 @@
                 <div class="primary-button m16 back-black" ng-click="next()">{{str.skip}}</div>
             </div>
         </md-tab>
-        <md-tab label="accet_credit">
+        <md-tab label="'accept_credit'">
             <div class="fill col">
                 <div class="row header align-start-center">
                     <p class="flex"></p>
@@ -48,7 +48,7 @@
                     <div class="row gap8 align-start-center">
                         <img class="img40 p8 img-gray" src="/mfm-wallet/img/back.svg">
                         <p class="text2">{{str.you_have_to_return}}:</p>
-                        <p class="text1">{{formatAmount(rating * percent, wallet.gas_domain, 2)}}</p>
+                        <p class="text1">{{formatAmount(rating * (1 + percent / 100), wallet.gas_domain, 2)}}</p>
                     </div>
                     <div class="row gap8 align-start-center">
                         <img class="img40 p8 img-gray" src="/mfm-wallet/img/history.svg">

@@ -1,5 +1,5 @@
-function openCredit(success) {
-    showDialog('/mfm-bank/credit/index.html?nocache', success, function ($scope) {
+function openPayOffCredit(success) {
+    showDialog('/mfm-bank/pay_off_credit/index.html?nocache', success, function ($scope) {
 
         function getCredits() {
             postContract("mfm-token", "trans.php", {
