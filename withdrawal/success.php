@@ -8,4 +8,4 @@ dataSet([usdt, withdrawal, $withdrawal_id, txid], $txid);
 
 $response[success] = true;
 
-commit($response, usdt_withdrawal_success);
+commit($response);

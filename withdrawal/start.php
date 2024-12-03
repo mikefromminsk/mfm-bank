@@ -27,4 +27,4 @@ dataSet([usdt, withdrawal, history], $withdrawal_id);
 
 $response[success] = true;
 
-commit($response, usdt_withdrawal_start);
+commit($response);
