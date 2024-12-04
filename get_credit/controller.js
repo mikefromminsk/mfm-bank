@@ -47,6 +47,7 @@ function openGetCredit(success) {
 
         $scope.$watch('pageIndex', function (newValue, oldValue) {
             if ($scope.questions != null && newValue == $scope.questions.length) {
+                swipeToRefresh($scope.close)
                 $scope.getRating()
             }
         })
@@ -84,11 +85,6 @@ function openGetCredit(success) {
             }, function () {
                 $scope.in_progress = false
             })
-        }
-
-        $scope.agree = false
-        $scope.agreeWithRules = function () {
-            $scope.agree = !$scope.agree
         }
 
         init()
