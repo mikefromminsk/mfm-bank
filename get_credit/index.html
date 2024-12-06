@@ -8,8 +8,8 @@
                         <img class="img16 img-gray400" src="/mfm-wallet/img/close.svg">
                     </div>
                 </div>
-                <div class="flex col p16 align-center input-content">
-                    <p class="text1 nowrap-disabled">{{item.question}}</p>
+                <div class="flex col p16 align-center input-content nowrap-disabled">
+                    <p class="text1">{{item.question}}</p>
                     <div class="mt16 p16 back-gray radius-default"
                          ng-repeat="answer in item.answers"
                          ng-style="{'background-color': item.answer === answer ? 'var(--gray200)' : 'var(--gray100)'}"
