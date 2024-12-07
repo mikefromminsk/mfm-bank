@@ -1,4 +1,5 @@
 function openPayOffCredit(success) {
+    trackCall(arguments)
     showDialog('/mfm-bank/pay_off_credit/index.html?nocache', success, function ($scope) {
 
         function getCredits() {

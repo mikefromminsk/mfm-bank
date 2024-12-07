@@ -6,7 +6,7 @@ $chain = get_required(chain);
 $token = get_required(gas_domain);
 
 $gas_domain = get_required(gas_domain);
-$bank_address = get_required(bank_address);
+$credit_address = get_required(bank_address);
 $credit_percent = get_required(credit_percent);
 
 //if (!dataExist([usdt, deposit, $deposit_address])) error("deposit address is not exist");
@@ -83,7 +83,7 @@ foreach ($trans as $tran) {
 
 if ($deposited > 0) {
     $deposited = round(floor($deposited * 100) / 100, 2);
-    tokenSend($token, $bank_address, $deposit_start_event[to], $deposited);
+    tokenSend($token, $credit_address, $deposit_start_event[to], $deposited);
     //trackEvent(deposit_success, $chain, $deposit_address, $deposit_start_event[to], $token, $deposited);
 }
 

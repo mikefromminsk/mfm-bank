@@ -1,6 +1,6 @@
 function openDeposit(success) {
     trackCall(arguments)
-    var depositCheckTimer
+    let depositCheckTimer
     showBottomSheet('/mfm-bank/deposit/console/index.html', function () {
         if (depositCheckTimer)
             clearInterval(depositCheckTimer)

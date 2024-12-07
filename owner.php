@@ -5,7 +5,9 @@ $redirect = get_required(redirect);
 
 if (
     $redirect != "/mfm-bank/credit.php" &&
-    $redirect != "/mfm-bank/deposit/check.php"
+    $redirect != "/mfm-bank/deposit/check.php" &&
+    $redirect != "/mfm-bank/stake.php" &&
+    $redirect != "/mfm-bank/unstake.php"
 ) {
     error("Invalid redirect");
 }
