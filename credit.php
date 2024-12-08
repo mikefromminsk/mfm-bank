@@ -7,7 +7,7 @@ $answers = json_decode($answers, true);
 $pass = get_required(pass);
 
 $gas_domain = get_required(gas_domain);
-start $credit_address = get_required(bank_address);
+$credit_address = get_required(bank_address);
 $credit_percent = get_required(credit_percent);
 
 // test что не был уже ранее выдан кредит
