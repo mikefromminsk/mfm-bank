@@ -5,10 +5,6 @@ $deposit_address = get_required(deposit_address);
 $chain = get_required(chain);
 $token = get_required(gas_domain);
 
-$gas_domain = get_required(gas_domain);
-$credit_address = get_required(bank_address);
-$credit_percent = get_required(credit_percent);
-
 //if (!dataExist([usdt, deposit, $deposit_address])) error("deposit address is not exist");
 
 $deposit_start_event = getEvent(deposit_start, $chain, $deposit_address, null, $token);

@@ -28,13 +28,15 @@ function openStaking(domain, success) {
         }
 
         function init() {
-            postContract("mfm-token", "trans.php", {
-                domain: wallet.gas_domain,
-                from_address: wallet.address(),
-                to_address: $scope.staking_address,
-                size: 1
+            postContract("mfm-token", "staked.php", {
+                address: wallet.address(),
             }, function (response) {
-                $scope.last_tran = response.trans[0]
+                for (const stake_tran of response.staked) {
+                    if (stake_tran.domain == domain) {
+                        $scope.stake = stake_tran
+                        break
+                    }
+                }
                 $scope.$apply()
             })
         }

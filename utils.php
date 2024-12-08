@@ -1,11 +1,9 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/mfm-data/utils.php";
 
-
 const credit_address = 'bank';
 const credit_percent = 7;
 const credit_pay_off_period_days = 30;
-
 
 const staking_address = 'staking';
 const staking_base_percent = 7;
@@ -95,4 +93,15 @@ function stake($domain, $address, $amount, $pass)
     if (tokenBalance($domain, $staking_address) < $next_pay_off) error("Not enough funds in staking address");
 
     return tokenSend($domain, $address, $staking_address, $amount, $pass);
+}
+
+
+function staked($address)
+{
+    $staking_address = get_required('staking_address');
+    return select("select * from trans t1"
+        . " left join tokens t2 on t1.`domain` = t2.`domain`"
+        . " where (`from` = '$address' or `to` = '$address')"
+        . " and (`from` = '$staking_address' or `to` = '$staking_address')"
+        . " group by t1.`domain` HAVING `time` = MAX(`time`) order by `time` desc") ?: [];
 }
