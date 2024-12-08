@@ -4,13 +4,7 @@ function openStaking(domain, success) {
         $scope.domain = domain
 
         $scope.stake = function () {
-            postContract("mfm-bank", "stake.php", {
-                domain: wallet.gas_domain,
-                address: wallet.address(),
-                amount: $scope.amount,
-            }, function () {
-                showSuccessDialog(str.you_have_unstaked + " " + $scope.formatAmount($scope.amount, wallet.gas_domain))
-            })
+            openSend(domain, $scope.staking_address, $scope.profile.balance, getStakes)
         }
 
         $scope.unstake = function () {
@@ -27,8 +21,9 @@ function openStaking(domain, success) {
             })
         }
 
-        function init() {
-            postContract("mfm-token", "staked.php", {
+
+        function getStakes(){
+            postContract("mfm-bank", "staked.php", {
                 address: wallet.address(),
             }, function (response) {
                 for (const stake_tran of response.staked) {
@@ -37,6 +32,14 @@ function openStaking(domain, success) {
                         break
                     }
                 }
+                $scope.$apply()
+            })
+        }
+
+        function init() {
+            getStakes()
+            getProfile(domain, function (response) {
+                $scope.profile = response
                 $scope.$apply()
             })
         }

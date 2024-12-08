@@ -5,8 +5,10 @@
             <img class="img16 img-gray400" src="/mfm-wallet/img/close.svg">
         </div>
     </div>
-    <div class="flex col scroll align-start-center">
-        {{stake}}
+    <div class="flex col scroll align-start-center nowrap-disabled">
+        <div class="flex col block">
+            {{stake}}
+        </div>
     </div>
     <div class="primary-button"
          ng-hide="stake.to == staking_address"
