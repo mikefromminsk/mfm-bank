@@ -12,7 +12,7 @@ function openStaking(domain, success) {
                         address: wallet.address(),
                         pass: pass,
                     }, function (response) {
-                        showSuccessDialog(str.you_have_staked + " " + $scope.formatAmount(response.staked, domain), getStakes)
+                        showSuccessDialog(str.you_have_staked + " " + $scope.formatAmount(response.staked, domain), $scope.close)
                     })
                 })
             })
@@ -26,7 +26,7 @@ function openStaking(domain, success) {
                         address: wallet.address(),
                         pass: pass,
                     }, function (response) {
-                        showSuccessDialog(str.you_have_unstaked + " " + $scope.formatAmount(response.unstaked, domain), getStakes)
+                        showSuccessDialog(str.you_have_unstaked + " " + $scope.formatAmount(response.unstaked, domain), $scope.close)
                     })
                 })
             })

@@ -88,10 +88,17 @@ function stake($domain, $address, $amount, $pass)
 
 function staked($address, $count = 10)
 {
-    $staked = tokenTrans(null, $address, staking_address, 0, $count);
-    foreach ($staked as &$item) {
-        $item[percent] = staking_percent;
-        $item[period_days] = staking_period_days;
+    $stake_trans = tokenTrans(null, $address, staking_address, 0, 50);
+    $staked = [];
+    foreach ($stake_trans as $tran) {
+        if ($staked[$tran[domain]] == null) {
+            $tran[percent] = staking_percent;
+            $tran[period_days] = staking_period_days;
+            $staked[$tran[domain]] = $tran;
+        }
     }
-    return $staked;
+    $staked = array_values($staked);
+    return array_filter($staked, function ($tran) {
+        return $tran[to] == staking_address;
+    });
 }
