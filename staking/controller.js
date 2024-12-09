@@ -3,24 +3,38 @@ function openStaking(domain, success) {
     showDialog('/mfm-bank/staking/index.html?nocache', success, function ($scope) {
         $scope.domain = domain
 
-        $scope.stake = function () {
-            openSend(domain, $scope.staking_address, $scope.profile.balance, getStakes)
-        }
-
-        $scope.unstake = function () {
+        $scope.openStake = function () {
             getPin(function (pin) {
                 calcPass(domain, pin, function (pass) {
-                    postContract("mfm-bank", "unstake.php", {
-                        domain: wallet.gas_domain,
+                    postContract("mfm-bank", "stake.php", {
+                        domain: domain,
+                        amount: $scope.amount,
                         address: wallet.address(),
                         pass: pass,
                     }, function (response) {
-                        showSuccessDialog(str.you_have_unstaked + " " + response.unstaked)
+                        showSuccessDialog(str.you_have_staked + " " + $scope.formatAmount(response.staked, domain), getStakes)
                     })
                 })
             })
         }
 
+        $scope.openUnstake = function () {
+            getPin(function (pin) {
+                calcPass(domain, pin, function (pass) {
+                    postContract("mfm-bank", "unstake.php", {
+                        domain: domain,
+                        address: wallet.address(),
+                        pass: pass,
+                    }, function (response) {
+                        showSuccessDialog(str.you_have_unstaked + " " + $scope.formatAmount(response.unstaked, domain), getStakes)
+                    })
+                })
+            })
+        }
+
+        $scope.setMax = function () {
+            $scope.amount = $scope.token.balance
+        }
 
         function getStakes(){
             postContract("mfm-bank", "staked.php", {
@@ -32,6 +46,7 @@ function openStaking(domain, success) {
                         break
                     }
                 }
+                $scope.reward = $scope.stake.amount * $scope.stake.percent / 100 * $scope.stake.period_days / 365
                 $scope.$apply()
             })
         }
@@ -39,7 +54,7 @@ function openStaking(domain, success) {
         function init() {
             getStakes()
             getProfile(domain, function (response) {
-                $scope.profile = response
+                $scope.token = response
                 $scope.$apply()
             })
         }

@@ -7,7 +7,7 @@ $answers = json_decode($answers, true);
 
 $response[rating] = rating($answers, $address);
 $response[percent] = credit_percent;
-$response[pay_off_period_days] = credit_pay_off_period_days;
+$response[pay_off_period_days] = credit_period_days;
 
 $response[answers] = $answers;
 

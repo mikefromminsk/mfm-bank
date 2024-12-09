@@ -6,6 +6,7 @@ $amount = get_required(amount);
 $address = get_required(address);
 $pass = get_required(pass);
 
-$response[success] = stake($domain, $address, $amount, $pass);
+$response[next_hash] = stake($domain, $address, $amount, $pass);
+$response[staked] = $amount;
 
 commit($response);

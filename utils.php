@@ -3,11 +3,11 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/mfm-data/utils.php";
 
 const credit_address = 'bank';
 const credit_percent = 7;
-const credit_pay_off_period_days = 30;
+const credit_period_days = 30;
 
 const staking_address = 'staking';
-const staking_base_percent = 7;
-const staking_pay_off_period_days = 30;
+const staking_percent = 7;
+const staking_period_days = 30;
 
 
 const PROVIDERS = [
@@ -63,14 +63,14 @@ function rating($answers, $address = null)
 
 function unstake($domain, $address, $pass)
 {
-    $last_tran = tokenLastTran($domain, staking_address, $address);
+    $last_tran = tokenLastTran($domain, $address, staking_address);
     $unstaked = 0;
     if ($last_tran[to] == staking_address) {
-        if (time() - $last_tran[time] > staking_pay_off_period_days * 24 * 60 * 60) {
-            $unstaked = round($last_tran[amount] * (1 + staking_base_percent / 100), 2);
-            tokenChangePass($domain, $address, $pass);
-            tokenSend($domain, staking_address, $address, $unstaked);
+        /*if (time() - $last_tran[time] > staking_period_days * 24 * 60 * 60)*/ {
+            $unstaked = round($last_tran[amount] * (1 + staking_percent / 100), 2);
         }
+        tokenChangePass($domain, $address, $pass);
+        tokenSend($domain, staking_address, $address, $unstaked);
     }
     return $unstaked;
 }
@@ -80,18 +80,18 @@ function stake($domain, $address, $amount, $pass)
 {
     $last_tran = tokenLastTran($domain, staking_address, $address);
     if ($last_tran[to] == staking_address) error("You need to unstake first");
-    $next_pay_off = round($amount * (1 + staking_base_percent / 100), 2);
+    $next_pay_off = round($amount * (1 + staking_percent / 100), 2);
     if (tokenBalance($domain, staking_address) < $next_pay_off) error("Not enough funds in staking address");
     return tokenSend($domain, $address, staking_address, $amount, $pass);
 }
 
 
-function staked($address)
+function staked($address, $count = 10)
 {
-    $staking_address = get_required('staking_address');
-    return select("select * from trans t1"
-        . " left join tokens t2 on t1.`domain` = t2.`domain`"
-        . " where (`from` = '$address' or `to` = '$address')"
-        . " and (`from` = '$staking_address' or `to` = '$staking_address')"
-        . " group by t1.`domain` HAVING `time` = MAX(`time`) order by `time` desc") ?: [];
+    $staked = tokenTrans(null, $address, staking_address, 0, $count);
+    foreach ($staked as &$item) {
+        $item[percent] = staking_percent;
+        $item[period_days] = staking_period_days;
+    }
+    return $staked;
 }

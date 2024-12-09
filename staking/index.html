@@ -7,17 +7,42 @@
     </div>
     <div class="flex col scroll align-start-center nowrap-disabled">
         <div class="flex col block">
-            {{stake}}
+            <div class="col input-content" ng-show="!stake || stake.from == 'staking'">
+                <p class="text1">{{str.invest_and_get}}</p>
+                <div class="text0">{{formatPercent(stake.percent)}}</div>
+                <p class="text1">{{str.every}} {{formatTimeDiff(stake.period_days * 60 * 60 * 24)}}</p>
+                <div class="flex row input-wrapper">
+                    <div class="input-label">{{domain}}</div>
+                    <input type="number"
+                           autocapitalize="off"
+                           autocomplete="off"
+                           ng-model="amount">
+                    <button class="border-none nowrap"
+                            ng-click="setMax()"
+                            ng-disabled="token.balance == 0">
+                        {{str.max}}
+                    </button>
+                </div>
+                <p>{{str.available}} {{formatAmount(token.balance, token.domain)}}</p>
+            </div>
+            <div class="col input-content" ng-show="stake.to == 'staking'">
+                <div class="col align-start-center">
+                    <p class="test1">{{str.available_rewards}}</p>
+                    <div class="test0">{{reward}}</div>
+                    <p class="test1">{{str.every}} {{formatTimeDiff(stake.time - stake.period_days * 60 * 60 * 24)}}</p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="primary-button"
          ng-hide="stake.to == staking_address"
-         ng-click="stake()">
+         ng-click="openStake()"
+         ng-disabled="token.balance == 0">
         {{str.stake}}
     </div>
     <div class="primary-button"
          ng-show="stake.to == staking_address"
-         ng-click="unstake()">
+         ng-click="openUnstake()">
         {{str.unstake}}
     </div>
 </md-dialog>
