@@ -1,0 +1,43 @@
+<md-bottom-sheet class="col">
+    <div class="row header align-start-center">
+        <p class="flex">{{str.share}}</p>
+        <div class="row align-center-center img32 back-gray radius-default ripple" ng-click="close()">
+            <img class="img16 img-gray400" src="/mfm-wallet/img/close.svg">
+        </div>
+    </div>
+    <div class="col input-content">
+        <div class="flex row input-wrapper">
+            <div class="input-label">{{str.amount}}</div>
+            <input type="number"
+                   autocapitalize="off"
+                   autocomplete="off"
+                   ng-model="amount">
+            <button class="border-none"
+                    ng-click="setMax()"
+                    ng-disabled="token.balance == 0">
+                {{str.max}}
+            </button>
+        </div>
+        <p>{{str.available}}: {{formatAmount(token.balance, token.domain)}}</p>
+    </div>
+    <div class="primary-button"
+         ng-click="create()"
+         ng-disabled="!amount || link || in_progress">
+        {{str.share}}
+    </div>
+    <div class="col input-content">
+        <div class="flex row input-wrapper">
+            <div class="input-label">{{str.link}}</div>
+            <input type="text"
+                   autocapitalize="off"
+                   autocomplete="off"
+                   ng-model="link">
+            <button class="border-none"
+                    ng-click="copyUrl()"
+                    ng-disabled="!link">
+                <img class="img24 img-white" src="/mfm-wallet/img/copy.svg">
+            </button>
+        </div>
+    </div>
+    <div></div>
+</md-bottom-sheet>
