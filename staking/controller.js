@@ -46,7 +46,8 @@ function openStaking(domain, success) {
                         break
                     }
                 }
-                $scope.reward = $scope.stake.amount * $scope.stake.percent / 100 * $scope.stake.period_days / 365
+                $scope.period_days = response.period_days
+                $scope.percent = response.percent
                 $scope.$apply()
             })
         }
