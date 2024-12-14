@@ -1,5 +1,5 @@
-function openShare(domain, success) {
-    showBottomSheet("/mfm-bank/share/create/index.html?nocache", success, function ($scope) {
+function openDrop(domain, success) {
+    showBottomSheet("/mfm-bank/drop/create/index.html?nocache", success, function ($scope) {
         domain = domain || wallet.gas_domain
         $scope.domain = domain
 
