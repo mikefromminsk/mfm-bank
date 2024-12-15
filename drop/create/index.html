@@ -7,11 +7,12 @@
     </div>
     <div class="col input-content">
         <div class="flex row input-wrapper">
-            <div class="input-label">{{str.amount}}</div>
+            <div ng-style="getLogo(domain)"></div>
             <input type="number"
                    autocapitalize="off"
                    autocomplete="off"
-                   ng-model="amount">
+                   ng-model="amount"
+                   placeholder="{{str.amount}}">
             <button class="border-none"
                     ng-click="setMax()"
                     ng-disabled="token.balance == 0">
@@ -27,11 +28,12 @@
     </div>
     <div class="col input-content">
         <div class="flex row input-wrapper">
-            <div class="input-label">{{str.link}}</div>
+            <div ng-style="getLogo(domain)"></div>
             <input type="text"
                    autocapitalize="off"
                    autocomplete="off"
-                   ng-model="link">
+                   ng-model="link"
+                   placeholder="{{str.link}}">
             <button class="border-none"
                     ng-click="copyUrl()"
                     ng-disabled="!link">
