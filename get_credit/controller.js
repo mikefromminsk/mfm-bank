@@ -65,7 +65,8 @@ function openGetCredit(success) {
             })
         }
 
-        $scope.getCredit = function () {
+        $scope.getCredit = function getCredit(rating) {
+            trackCall(arguments)
             $scope.in_progress = true
             getPin(function (pin) {
                 calcPass(wallet.gas_domain, pin, function (pass) {
